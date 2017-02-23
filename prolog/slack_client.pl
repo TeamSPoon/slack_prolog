@@ -11,7 +11,9 @@
 /** <module> slack_client - Provides a websocket API to write slack clients and bots
 
 */
-
+:- if(exists_source(library(dicts))).
+	:- use_module(library(dicts)).
+:- endif.
 
 :- use_module(library(http/http_open)).
 :- use_module(library(http/http_client)).
@@ -20,6 +22,8 @@
 :- use_module(library(http/json)).
 :- use_module(library(http/json_convert)).
 :- use_module(library(http/websocket)).
+
+:- use_module(library(udt)).
 
 
 /* tests to see if logicmoo utils are installed.. If not, create the predicates it will use */
@@ -83,6 +87,77 @@ is_thread_running(ID):-
 :- if(( \+ slack_token(_))).
 :- throw(missing(slack_token(_))).
 :- endif.
+
+
+
+
+:- oo_class_begin(slack_client).
+
+% url	A WebSocket Message Server URL.
+:- oo_class_field(url).
+
+% self	The authenticated bot user.
+:- oo_inner_class_begin(clients).
+
+slack_client:clients:new(Ref):- throw(clients:new(Ref)).
+
+:- oo_inner_class_end(clients).
+
+
+
+% self	The authenticated bot user.
+:- oo_inner_class_begin(self).
+:- oo_inner_class_end(self).
+
+% self	The authenticated bot user.
+:- oo_inner_class_begin(self).
+:- oo_inner_class_end(self).
+
+
+% team	Details on the authenticated user's team.
+:- oo_inner_class_begin(team).
+:- oo_inner_class_end(team).
+
+% users	A hash of user objects by user ID.
+:- oo_inner_class_begin(users).
+:- oo_inner_class_end(users).
+
+
+% channels	A hash of channel objects, one for every channel visible to the authenticated user.
+:- oo_inner_class_begin(channels).
+:- oo_inner_class_end(channels).
+
+% groups	A hash of group objects, one for every group the authenticated user is in.
+:- oo_inner_class_begin(self).
+:- oo_inner_class_end(self).
+
+% ims	A hash of IM objects, one for every direct message channel visible to the authenticated user.
+:- oo_inner_class_begin(groups).
+:- oo_inner_class_end(groups).
+
+% bots	Details of the integrations set up on this team.
+:- oo_inner_class_begin(bots).
+:- oo_inner_class_end(bots).
+
+% text	textual utils.
+:- oo_inner_class_begin(text).
+:- oo_inner_class_end(text).
+
+% debug	Debugger fidling.
+:- oo_inner_class_begin(self).
+:- oo_inner_class_end(self).
+
+% events	Registered callbacks.
+:- oo_inner_class_begin(events).
+:- oo_inner_class_end(events).
+
+% files	registered storage.
+:- oo_inner_class_begin(files).
+:- oo_inner_class_end(files).
+
+:- oo_class_end(slack_client).
+
+
 
 % ===============================================
 % Utility functions
