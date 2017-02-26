@@ -1,2 +1,15 @@
 .slack_auth.pl
+*.tar
+*.tar.*
+*.jar
+*.exe
+*.msi
+*.zip
+*.tgz
+*.log
+*.log.*
+*.sig
+*.qlf
+INDEX.pl
+
 
