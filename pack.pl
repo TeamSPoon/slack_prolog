@@ -1,5 +1,5 @@
 name(slack_prolog).
-version('1.1.114').
+version('1.1.115').
 title('Prolog interface to Slack http://www.slack.com').
 keywords([chat,bots,slack]).
 author( 'Douglas Miles', 'http://www.linkedin.com/in/logicmoo' ).
