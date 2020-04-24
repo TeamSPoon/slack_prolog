@@ -219,6 +219,7 @@ add_slack_info1(Type,ID,Data):-assert(slack_info(Type,ID,Data)).
 
 
 name_to_id(Name,ID):-text_to_string(Name,NameS),slack_info(ID,name,NameS),!.
+name_to_id(Name,ID):-text_to_string(Name,NameS),slack_info(ID,real_name,NameS),!.
 name_to_id(Name,ID):-text_to_string(Name,NameS),slack_info(_,instance,ID), slack_info(ID,_,NameS),!.
 
 same_ids(ID,IDS):-text_to_string(ID,IDA),text_to_string(IDS,IDB),IDA==IDB.
@@ -231,7 +232,7 @@ slack_ensure_im(To,IM):- name_to_id(To,ID), slack_send({type:'im_open',user:ID})
 slack_id_time(ID,TS):-flag(slack_id,OID,OID+1),ID is OID+1,get_time(Time),number_string(Time,TS).
 
 
-slack_self(Self):-slack_info(self, id, Self).
+slack_self(Self):- get_slack_info(self, id, Self).
 
 %  {"id":2,"type":"ping","time":1484999912}
 slack_ping :- slack_id_time(ID,_),get_time(Time),TimeRnd is round( Time),slack_send({"id":ID,"type":"ping", "time":TimeRnd}).
